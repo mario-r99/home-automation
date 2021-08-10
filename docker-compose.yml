@@ -1,34 +1,45 @@
 version: '2'
+
 volumes:
-    speedtest-data:
-    settings:
-    dashboard-data:
+
+  speedtest-data:
+  dashboard-data:
+  settings:
+  homeassistant-config:
+
 services:
+
   speedtest:
     build: ./speedtest
+    container_name: speedtest
     privileged: true
     restart: never
-    volumes:
-        - 'speedtest-data:/data'
     network_mode: host
+    volumes:
+      - 'speedtest-data:/data'
     labels:
       io.balena.features.supervisor-api: 1
+
   connector:
     image:  balenablocks/connector
+    container_name: connector
+    privileged: true
     restart: always
     labels:
       io.balena.features.balena-api: '1'
-    privileged: true
-  dashboard:
-    restart: always
+
+  grafana:
     build: ./dashboard
+    container_name: dashboard
+    restart: always
     ports:
-      - "80"
+      - "3000:80"
     volumes:
-        - 'dashboard-data:/data'
+      - 'dashboard-data:/data'
+
   influxdb:
     image: influxdb@sha256:73f876e0c3bd02900f829d4884f53fdfffd7098dd572406ba549eed955bf821f
-    container_name: influxdb
+    container_name: database
     restart: always
     environment:
       - INFLUXDB_DB=balena
@@ -39,8 +50,27 @@ services:
       - INFLUXDB_DATA_DIR=/data
     volumes:
       - 'speedtest-data:/data'
-  mqtt:
+
+  mosquitto:
     image: arm32v6/eclipse-mosquitto@sha256:ec3e1dbb9e198ff04d62c2d0f6eff74cad7438c7d080b89a28428fb96c8479c4
+    container_name: mqtt-broker
+    restart: always
     ports:
       - "1883:1883"
+
+  home-assistant:
+    image: homeassistant/home-assistant
+    container_name: home-assistant
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - TZ=Europe/Berlin
+    volumes:
+      - 'homeassistant-config:/config'
+
+  overview:
+    build: ./overview
+    container_name: overview
     restart: always
+    ports: 
+      - "80:80"
