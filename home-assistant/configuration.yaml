@@ -1,3 +1,16 @@
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+# Bose Soundtouch 300
 media_player:
   - platform: soundtouch
     host: 192.168.178.88
