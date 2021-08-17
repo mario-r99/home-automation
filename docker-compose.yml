@@ -4,7 +4,6 @@ volumes:
 
   speedtest-data:
   dashboard-data:
-  settings:
   homeassistant-config:
 
 services:
@@ -60,8 +59,11 @@ services:
   home-assistant:
     build: ./home-assistant
     container_name: home-assistant
+    privileged: true
     restart: unless-stopped
     network_mode: host
+    ports: 
+      - 8123:8123
     volumes:
       - 'homeassistant-config:/config'
 
