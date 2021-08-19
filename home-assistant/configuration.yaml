@@ -1,6 +1,10 @@
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
+# Set port
+http:
+  server_port: 80
+
 # Text to speech
 tts:
   - platform: google_translate
