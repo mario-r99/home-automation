@@ -21,12 +21,17 @@ google_assistant:
   service_account: !include google-service-account.json
   report_state: true
 
-# Bose Soundtouch 300
 media_player:
+  # Bose Soundtouch 300
   - platform: soundtouch
     host: 192.168.178.88
     port: 8090
     name: Mario Soundbar
+  # Samsung TV
+  - platform: samsungtv_tizen
+    host: 192.168.178.22
+    mac: 54:BD:79:05:5C:E8
+    name: Mario Fernseher
 
 # Spotify
 spotify:
