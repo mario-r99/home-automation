@@ -11,7 +11,7 @@ assets:
   logo:
     type: "blob.asset"
     data:
-      url: "https://raw.githubusercontent.com/mario-r99/home-automation/main/logo.png?token=ALU27LXG4YTV7DVKAA6GLGTBET4CM"
+      url: "https://raw.githubusercontent.com/mario-r99/home-automation/main/logo.png?token=ALU27LV2FFZ2CT54HIOZ3GLBINWUS"
 data:
   applicationEnvironmentVariables:
     - FREQUENCY: 3600
