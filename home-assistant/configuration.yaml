@@ -31,3 +31,11 @@ media_player:
 spotify:
   client_id: e91857f8248e4e3897f64ca6d14213e6
   client_secret: 6759397f60fe44e2a9e1877e2b641320
+
+# Circadian Daylight
+circadian_lighting:
+
+switch:
+  - platform: circadian_lighting
+    lights_ct:
+      - light.deckenlampe
