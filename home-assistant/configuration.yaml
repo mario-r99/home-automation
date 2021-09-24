@@ -15,12 +15,6 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 
 
-# Google Assistant
-google_assistant:
-  project_id: home-assistant-93b63
-  service_account: !include google-service-account.json
-  report_state: true
-
 media_player:
   # Bose Soundtouch 300
   - platform: soundtouch
